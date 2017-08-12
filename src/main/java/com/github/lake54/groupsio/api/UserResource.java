@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
@@ -86,6 +87,26 @@ public class UserResource extends BaseResource
         }
         
         return subscriptions;
+    }
+    
+    public User updateUser(final User user)
+    {
+        throw new NotImplementedException("Not implemented in client");
+    }
+    
+    public Subscription updateSubscription(final Subscription subscription)
+    {
+        throw new UnsupportedOperationException("Not available in API");
+    }
+    
+    public void deleteSubscription(final Subscription subscription)
+    {
+        throw new UnsupportedOperationException("Not available in API");
+    }
+    
+    public void joinGroup(final Integer groupId)
+    {
+        throw new UnsupportedOperationException("Not available in API");
     }
     
 }

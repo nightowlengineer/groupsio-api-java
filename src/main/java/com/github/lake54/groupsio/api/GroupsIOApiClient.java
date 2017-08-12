@@ -107,6 +107,26 @@ public class GroupsIOApiClient
     }
     
     /**
+     * Actions involving a specific group.
+     * 
+     * @return {@link GroupResource}
+     */
+    public GroupResource group()
+    {
+        return new GroupResource(this, DEFAULT_VERSIONED_API_BASE);
+    }
+    
+    /**
+     * Actions involving message archives.
+     * 
+     * @return {@link ArchiveResource}
+     */
+    public ArchiveResource archive()
+    {
+        return new ArchiveResource(this, DEFAULT_VERSIONED_API_BASE);
+    }
+    
+    /**
      * @param apiToken
      *            set the apiToken
      */

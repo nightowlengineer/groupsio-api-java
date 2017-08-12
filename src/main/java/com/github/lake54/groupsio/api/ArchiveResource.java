@@ -10,7 +10,6 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
 
 import com.github.lake54.groupsio.api.domain.Page;
-import com.github.lake54.groupsio.api.domain.Subscription;
 import com.github.lake54.groupsio.api.domain.Topic;
 import com.github.lake54.groupsio.api.exception.GroupsIOApiException;
 
@@ -23,10 +22,9 @@ public class ArchiveResource extends BaseResource
     }
     
     /**
-     * Gets a list of {@link Subscription}s that the current user is subscribed
-     * to.
+     * Gets a list of {@link Topic}s from the specified group.
      * 
-     * @return {@link List}<{@link Subscription}> representing the subscriptions
+     * @return {@link List}<{@link Topic}> representing the topics in the group
      * @throws URISyntaxException
      * @throws IOException
      * @throws GroupsIOApiException

@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class User
 {
+    
     private Integer id;
     private String object;
     private String created;
@@ -18,7 +19,7 @@ public class User
     private String profilePhotoId;
     private Boolean hasProfilePhoto;
     private String postPref;
-    private String prePagePref;
+    private String perPagePref;
     private Boolean allowFacebookLogin;
     private Boolean allowGoogleLogin;
     private Boolean twoFactorEnabled;
@@ -67,6 +68,7 @@ public class User
      * @param searchSortDir
      * @param postPref
      * @param status
+     * @param perPagePref
      * @param website
      * @param timePref
      * @param topicSortDir
@@ -76,11 +78,10 @@ public class User
      * @param fullName
      * @param dontMungeMessageId
      * @param twoFactorEnabled
-     * @param prePagePref
      */
     public User(final Integer id, final String object, final String created, final String updated, final String email,
             final String fullName, final String userName, final String timezone, final String status, final String profilePhotoId,
-            final Boolean hasProfilePhoto, final String postPref, final String prePagePref, final Boolean allowFacebookLogin,
+            final Boolean hasProfilePhoto, final String postPref, final String perPagePref, final Boolean allowFacebookLogin,
             final Boolean allowGoogleLogin, final Boolean twoFactorEnabled, final String recoveryCodes, final Boolean dontMungeMessageId,
             final String aboutMe, final String aboutFormat, final String location, final String website, final String timePref,
             final String profilePrivacy, final String defaultMessageView, final String topicsSortDir, final String topicSortDir,
@@ -99,7 +100,7 @@ public class User
         this.profilePhotoId = profilePhotoId;
         this.hasProfilePhoto = hasProfilePhoto;
         this.postPref = postPref;
-        this.prePagePref = prePagePref;
+        this.perPagePref = perPagePref;
         this.allowFacebookLogin = allowFacebookLogin;
         this.allowGoogleLogin = allowGoogleLogin;
         this.twoFactorEnabled = twoFactorEnabled;
@@ -312,19 +313,19 @@ public class User
         return this;
     }
     
-    public String getPrePagePref()
+    public String getPerPagePref()
     {
-        return prePagePref;
+        return perPagePref;
     }
     
-    public void setPrePagePref(final String prePagePref)
+    public void setPerPagePref(final String perPagePref)
     {
-        this.prePagePref = prePagePref;
+        this.perPagePref = perPagePref;
     }
     
-    public User withPrePagePref(final String prePagePref)
+    public User withPerPagePref(final String perPagePref)
     {
-        this.prePagePref = prePagePref;
+        this.perPagePref = perPagePref;
         return this;
     }
     
@@ -627,7 +628,7 @@ public class User
     {
         return new HashCodeBuilder().append(id).append(object).append(created).append(updated).append(email).append(fullName)
                 .append(userName).append(timezone).append(status).append(profilePhotoId).append(hasProfilePhoto).append(postPref)
-                .append(prePagePref).append(allowFacebookLogin).append(allowGoogleLogin).append(twoFactorEnabled).append(recoveryCodes)
+                .append(perPagePref).append(allowFacebookLogin).append(allowGoogleLogin).append(twoFactorEnabled).append(recoveryCodes)
                 .append(dontMungeMessageId).append(aboutMe).append(aboutFormat).append(location).append(website).append(timePref)
                 .append(profilePrivacy).append(defaultMessageView).append(topicsSortDir).append(topicSortDir).append(messagesSortDir)
                 .append(expandedMessagesSortDir).append(searchSort).append(searchSortDir).toHashCode();
@@ -648,7 +649,7 @@ public class User
         return new EqualsBuilder().append(id, rhs.id).append(object, rhs.object).append(created, rhs.created).append(updated, rhs.updated)
                 .append(email, rhs.email).append(fullName, rhs.fullName).append(userName, rhs.userName).append(timezone, rhs.timezone)
                 .append(status, rhs.status).append(profilePhotoId, rhs.profilePhotoId).append(hasProfilePhoto, rhs.hasProfilePhoto)
-                .append(postPref, rhs.postPref).append(prePagePref, rhs.prePagePref).append(allowFacebookLogin, rhs.allowFacebookLogin)
+                .append(postPref, rhs.postPref).append(perPagePref, rhs.perPagePref).append(allowFacebookLogin, rhs.allowFacebookLogin)
                 .append(allowGoogleLogin, rhs.allowGoogleLogin).append(twoFactorEnabled, rhs.twoFactorEnabled)
                 .append(recoveryCodes, rhs.recoveryCodes).append(dontMungeMessageId, rhs.dontMungeMessageId).append(aboutMe, rhs.aboutMe)
                 .append(aboutFormat, rhs.aboutFormat).append(location, rhs.location).append(website, rhs.website)

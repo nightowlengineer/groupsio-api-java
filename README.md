@@ -2,6 +2,8 @@
 # groupsio-api-java
 Java client library for the [Groups.io](https://groups.io) API.
 
+[![Build Status](https://travis-ci.org/lake54/groupsio-api-java.svg?branch=master)](https://travis-ci.org/lake54/groupsio-api-java)
+
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/lake54/groupsio-api-java/master/LICENSE)
 
 ## What is Groups.io?

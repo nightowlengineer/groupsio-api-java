@@ -40,6 +40,24 @@ public class UserResource extends BaseResource
     }
     
     /**
+     * Gets a user's {@link Subscription} for the specified group ID
+     * 
+     * @return the user's {@link Subscription} for the specified group ID
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
+    public Subscription getSubscription(final Integer groupId) throws URISyntaxException, IOException, GroupsIOApiException
+    {
+        final URIBuilder uri = new URIBuilder().setPath(baseUrl + "getsub");
+        uri.setParameter("group_id", groupId.toString());
+        final HttpRequestBase request = new HttpGet();
+        request.setURI(uri.build());
+        
+        return callApi(request, Subscription.class);
+    }
+    
+    /**
      * Gets a list of {@link Subscription}s that the current user is subscribed
      * to.
      * 

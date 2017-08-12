@@ -21,6 +21,26 @@ public class MemberResource extends BaseResource
     }
     
     /**
+     * Gets a user's {@link Subscription} for the specified group and member IDs
+     * 
+     * @return the user's {@link Subscription} for the specified group ID
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
+    public Subscription getMemberInGroup(final Integer groupId, final Integer memberId)
+            throws URISyntaxException, IOException, GroupsIOApiException
+    {
+        final URIBuilder uri = new URIBuilder().setPath(baseUrl + "getmember");
+        uri.setParameter("group_id", groupId.toString());
+        uri.setParameter("sub_id", memberId.toString());
+        final HttpRequestBase request = new HttpGet();
+        request.setURI(uri.build());
+        
+        return callApi(request, Subscription.class);
+    }
+    
+    /**
      * Gets a list of members (represented by {@link Subscription}) subscribed
      * to a particular group.
      * 

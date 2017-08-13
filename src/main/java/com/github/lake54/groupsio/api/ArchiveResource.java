@@ -31,6 +31,8 @@ public class ArchiveResource extends BaseResource
      */
     public List<Topic> getTopics(final Integer groupId) throws URISyntaxException, IOException, GroupsIOApiException
     {
+        throw new UnsupportedOperationException("Not available in API");
+        /*- Commented out until implemented in the API.
         final URIBuilder uri = new URIBuilder().setPath(baseUrl + "gettopics");
         uri.setParameter("group_id", groupId.toString());
         uri.setParameter("limit", MAX_RESULTS);
@@ -50,6 +52,7 @@ public class ArchiveResource extends BaseResource
         }
         
         return topics;
+        */
     }
     
 }

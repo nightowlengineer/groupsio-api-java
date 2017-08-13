@@ -1,4 +1,4 @@
-package com.github.lake54.groupsio.api;
+package com.github.lake54.groupsio.api.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.github.lake54.groupsio.api.GroupsIOApiClient;
 import com.github.lake54.groupsio.api.domain.Error;
 import com.github.lake54.groupsio.api.domain.Login;
 import com.github.lake54.groupsio.api.exception.GroupsIOApiException;

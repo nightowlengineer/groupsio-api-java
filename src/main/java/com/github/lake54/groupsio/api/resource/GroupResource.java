@@ -1,4 +1,4 @@
-package com.github.lake54.groupsio.api;
+package com.github.lake54.groupsio.api.resource;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -8,6 +8,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
 
+import com.github.lake54.groupsio.api.GroupsIOApiClient;
 import com.github.lake54.groupsio.api.domain.Group;
 import com.github.lake54.groupsio.api.domain.Permissions;
 import com.github.lake54.groupsio.api.exception.GroupsIOApiException;

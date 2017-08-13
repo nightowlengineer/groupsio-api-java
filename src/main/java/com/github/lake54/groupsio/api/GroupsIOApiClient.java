@@ -3,6 +3,11 @@ package com.github.lake54.groupsio.api;
 import org.apache.http.HttpHost;
 import org.apache.http.util.Asserts;
 
+import com.github.lake54.groupsio.api.resource.ArchiveResource;
+import com.github.lake54.groupsio.api.resource.GroupResource;
+import com.github.lake54.groupsio.api.resource.MemberResource;
+import com.github.lake54.groupsio.api.resource.UserResource;
+
 /**
  * Main interface with Groups.io.
  * Actions will be carried out in the context of the user you login with. If you

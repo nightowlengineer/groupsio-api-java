@@ -2,6 +2,7 @@
 # groupsio-api-java
 Java client library for the [Groups.io](https://groups.io) API.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/20f576734d04430bb3c90bf7ce7c119f)](https://www.codacy.com/app/james/groupsio-api-java?utm_source=github.com&utm_medium=referral&utm_content=lake54/groupsio-api-java&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/lake54/groupsio-api-java.svg?branch=master)](https://travis-ci.org/lake54/groupsio-api-java)
 
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/lake54/groupsio-api-java/master/LICENSE)

@@ -227,9 +227,37 @@ public class MemberResource extends BaseResource
         }
     }
     
-    public void approveMember()
+    /**
+     * Approve a member to a group
+     * 
+     * @param groupId
+     *            of the group they should belong to
+     * @param subscriptionId
+     *            of the subscription they have
+     * @return the user's {@link Subscription}
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
+    public Subscription approveMember(final Integer groupId, final Integer subscriptionId)
+            throws URISyntaxException, IOException, GroupsIOApiException
     {
-        throw new UnsupportedOperationException("Not implemented in API");
+        if (apiClient.group().getPermissions(groupId).getManagePendingMembers())
+        {
+            final URIBuilder uri = new URIBuilder().setPath(baseUrl + "approvemember");
+            uri.setParameter("group_id", groupId.toString());
+            uri.setParameter("sub_id", subscriptionId.toString());
+            final HttpRequestBase request = new HttpGet();
+            request.setURI(uri.build());
+            
+            return callApi(request, Subscription.class);
+        }
+        else
+        {
+            final Error error = new Error();
+            error.setType(GroupsIOApiExceptionType.INADEQUATE_PERMISSIONS);
+            throw new GroupsIOApiException(error);
+        }
     }
     
     public void directAddMember()
@@ -242,9 +270,37 @@ public class MemberResource extends BaseResource
         throw new UnsupportedOperationException("Not implemented in API");
     }
     
-    public void deleteMember()
+    /**
+     * Remove a member from a group
+     * 
+     * @param groupId
+     *            of the group they belong to
+     * @param subscriptionId
+     *            of the subscription they have
+     * @return the user's {@link Subscription}
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
+    public Subscription removeMember(final Integer groupId, final Integer subscriptionId)
+            throws URISyntaxException, IOException, GroupsIOApiException
     {
-        throw new UnsupportedOperationException("Not implemented in API");
+        if (apiClient.group().getPermissions(groupId).getRemoveMembers())
+        {
+            final URIBuilder uri = new URIBuilder().setPath(baseUrl + "removemember");
+            uri.setParameter("group_id", groupId.toString());
+            uri.setParameter("sub_id", subscriptionId.toString());
+            final HttpRequestBase request = new HttpGet();
+            request.setURI(uri.build());
+            
+            return callApi(request, Subscription.class);
+        }
+        else
+        {
+            final Error error = new Error();
+            error.setType(GroupsIOApiExceptionType.INADEQUATE_PERMISSIONS);
+            throw new GroupsIOApiException(error);
+        }
     }
     
     /**

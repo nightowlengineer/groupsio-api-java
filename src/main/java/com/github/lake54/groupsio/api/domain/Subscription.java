@@ -30,7 +30,7 @@ public class Subscription
     private String modPermissions;
     private String ownerMsgNotify;
     private String email;
-    private String userStatus;
+    private UserStatus userStatus;
     private String userName;
     private String timezone;
     private String fullName;
@@ -84,7 +84,7 @@ public class Subscription
             final Boolean autoFollowReplies, final String maxAttachmentSize, final Integer approvedPosts, final String modStatus,
             final String pendingMsgNotify, final String pendingSubNotify, final String subNotify, final String storageNotify,
             final String subGroupNotify, final String messageReportNotify, final String modPermissions, final String ownerMsgNotify,
-            final String email, final String userStatus, final String userName, final String timezone, final String fullName,
+            final String email, final UserStatus userStatus, final String userName, final String timezone, final String fullName,
             final String aboutMe, final String aboutFormat, final String location, final String website)
     {
         super();
@@ -489,17 +489,17 @@ public class Subscription
         return this;
     }
     
-    public String getUserStatus()
+    public UserStatus getUserStatus()
     {
         return userStatus;
     }
     
-    public void setUserStatus(final String userStatus)
+    public void setUserStatus(final UserStatus userStatus)
     {
         this.userStatus = userStatus;
     }
     
-    public Subscription withUserStatus(final String userStatus)
+    public Subscription withUserStatus(final UserStatus userStatus)
     {
         this.userStatus = userStatus;
         return this;

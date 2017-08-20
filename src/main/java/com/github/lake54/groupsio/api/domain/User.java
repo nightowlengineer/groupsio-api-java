@@ -15,7 +15,7 @@ public class User
     private String fullName;
     private String userName;
     private String timezone;
-    private String status;
+    private UserStatus status;
     private String profilePhotoId;
     private Boolean hasProfilePhoto;
     private String postPref;
@@ -80,7 +80,7 @@ public class User
      * @param twoFactorEnabled
      */
     public User(final Integer id, final String object, final String created, final String updated, final String email,
-            final String fullName, final String userName, final String timezone, final String status, final String profilePhotoId,
+            final String fullName, final String userName, final String timezone, final UserStatus status, final String profilePhotoId,
             final Boolean hasProfilePhoto, final String postPref, final String perPagePref, final Boolean allowFacebookLogin,
             final Boolean allowGoogleLogin, final Boolean twoFactorEnabled, final String recoveryCodes, final Boolean dontMungeMessageId,
             final String aboutMe, final String aboutFormat, final String location, final String website, final String timePref,
@@ -249,17 +249,17 @@ public class User
         return this;
     }
     
-    public String getStatus()
+    public UserStatus getStatus()
     {
         return status;
     }
     
-    public void setStatus(final String status)
+    public void setStatus(final UserStatus status)
     {
         this.status = status;
     }
     
-    public User withStatus(final String status)
+    public User withStatus(final UserStatus status)
     {
         this.status = status;
         return this;

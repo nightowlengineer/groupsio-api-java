@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -262,12 +263,12 @@ public class MemberResource extends BaseResource
     
     public void directAddMember()
     {
-        throw new UnsupportedOperationException("Not implemented in API");
+        throw new NotImplementedException("Not implemented in client");
     }
     
     public void inviteMember()
     {
-        throw new UnsupportedOperationException("Not implemented in API");
+        throw new NotImplementedException("Not implemented in client");
     }
     
     /**

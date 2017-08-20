@@ -13,7 +13,7 @@ public class Subscription
     private String updated;
     private Integer userId;
     private Integer groupId;
-    private String status;
+    private SubscriptionStatus status;
     private String postStatus;
     private String emailDelivery;
     private String messageSelection;
@@ -80,7 +80,8 @@ public class Subscription
      * @param postStatus
      */
     public Subscription(final Integer id, final String object, final String created, final String updated, final Integer userId,
-            final Integer groupId, final String status, final String postStatus, final String emailDelivery, final String messageSelection,
+            final Integer groupId, final SubscriptionStatus status, final String postStatus, final String emailDelivery,
+            final String messageSelection,
             final Boolean autoFollowReplies, final String maxAttachmentSize, final Integer approvedPosts, final String modStatus,
             final String pendingMsgNotify, final String pendingSubNotify, final String subNotify, final String storageNotify,
             final String subGroupNotify, final String messageReportNotify, final String modPermissions, final String ownerMsgNotify,
@@ -217,17 +218,17 @@ public class Subscription
         return this;
     }
     
-    public String getStatus()
+    public SubscriptionStatus getStatus()
     {
         return status;
     }
     
-    public void setStatus(final String status)
+    public void setStatus(final SubscriptionStatus status)
     {
         this.status = status;
     }
     
-    public Subscription withStatus(final String status)
+    public Subscription withStatus(final SubscriptionStatus status)
     {
         this.status = status;
         return this;

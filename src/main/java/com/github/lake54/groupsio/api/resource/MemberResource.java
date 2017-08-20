@@ -146,6 +146,18 @@ public class MemberResource extends BaseResource
         throw new UnsupportedOperationException("Not implemented in API");
     }
     
+    /**
+     * Send a bounce probe to a user if they are bouncing
+     * 
+     * @param groupId
+     *            of the group they belong to
+     * @param subscriptionId
+     *            of the subscription they have
+     * @return the user's {@link Subscription}
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
     public Subscription sendBounceProbe(final Integer groupId, final Integer subscriptionId)
             throws URISyntaxException, IOException, GroupsIOApiException
     {

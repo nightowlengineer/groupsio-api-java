@@ -16,6 +16,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -38,7 +39,8 @@ public class BaseResource
     protected final String baseUrl;
     protected static final String MAX_RESULTS = "100";
     public static final ObjectMapper OM = new ObjectMapper().setPropertyNamingStrategy(
-            PropertyNamingStrategy.SNAKE_CASE).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            PropertyNamingStrategy.SNAKE_CASE).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .setSerializationInclusion(Include.NON_NULL);
     
     public BaseResource(final GroupsIOApiClient client, final String baseUrl)
     {
@@ -108,10 +110,9 @@ public class BaseResource
      */
     protected <T> T callApi(final HttpUriRequest request, final Class<T> type, final Boolean login) throws IOException, GroupsIOApiException
     {
-        final HttpResponse response;
         try (final CloseableHttpClient client = getHttpClient(login, request))
         {
-            response = client.execute(request);
+            final HttpResponse response = client.execute(request);
             final InputStream stream = response.getEntity().getContent();
             final byte[] bytes = IOUtils.toByteArray(stream);
             if (response.getStatusLine().getStatusCode() != 200)

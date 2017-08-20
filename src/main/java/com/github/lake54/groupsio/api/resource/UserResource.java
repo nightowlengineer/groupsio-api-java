@@ -95,6 +95,24 @@ public class UserResource extends BaseResource
         return subscriptions;
     }
     
+    /**
+     * Update a user given a blank {@link User} object with only the updated
+     * fields set.
+     * Example:
+     * 
+     * <pre>
+     * final User userToUpdate = new User();
+     * userToUpdate.setPerPagePref("user_per_page_pref50");
+     * final User updatedUser = client.user().updateUser(userToUpdate);
+     * </pre>
+     * 
+     * @param user
+     *            - with only the updated fields set
+     * @return the full {@link User} after a successful update
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
     public User updateUser(final User user) throws URISyntaxException, IOException, GroupsIOApiException
     {
         final URIBuilder uri = new URIBuilder().setPath(baseUrl + "updateuser");

@@ -2,16 +2,26 @@ package com.github.lake54.groupsio.api.resource;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
-import org.apache.commons.lang3.NotImplementedException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.github.lake54.groupsio.api.GroupsIOApiClient;
+import com.github.lake54.groupsio.api.domain.Error;
 import com.github.lake54.groupsio.api.domain.Group;
+import com.github.lake54.groupsio.api.domain.Page;
 import com.github.lake54.groupsio.api.domain.Permissions;
 import com.github.lake54.groupsio.api.exception.GroupsIOApiException;
+import com.github.lake54.groupsio.api.exception.GroupsIOApiExceptionType;
 
 public class GroupResource extends BaseResource
 {
@@ -57,9 +67,36 @@ public class GroupResource extends BaseResource
         return callApi(request, Group.class);
     }
     
-    public void getSubgroups(final Integer groupId)
+    /**
+     * Gets a list of groups for a given group ID
+     * 
+     * @param groupId
+     *            to fetch subgroups for
+     * @return {@link List}<{@link Group}> belonging to a parent group.
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
+    public List<Group> getSubgroups(final Integer groupId) throws URISyntaxException, IOException, GroupsIOApiException
     {
-        throw new NotImplementedException("Not implemented in client");
+        final URIBuilder uri = new URIBuilder().setPath(baseUrl + "getsubgroups");
+        uri.setParameter("group_id", groupId.toString());
+        uri.setParameter("limit", MAX_RESULTS);
+        final HttpRequestBase request = new HttpGet();
+        request.setURI(uri.build());
+        
+        Page page = callApi(request, Page.class);
+        final List<Group> subgroups = Arrays.asList(OM.convertValue(page.getData(), Group[].class));
+        
+        while (page.getHasMore())
+        {
+            uri.setParameter("page_token", page.getNextPageToken().toString());
+            request.setURI(uri.build());
+            page = callApi(request, Page.class);
+            subgroups.addAll(Arrays.asList(OM.convertValue(page.getData(), Group[].class)));
+        }
+        
+        return subgroups;
     }
     
     public void createSubGroup(final Integer groupId, final String name, final String description, final String privacy)
@@ -67,9 +104,48 @@ public class GroupResource extends BaseResource
         throw new UnsupportedOperationException("Not implemented in API");
     }
     
-    public Group updateGroup(final Group group)
+    /**
+     * Update a group given a blank {@link Group} object with only the updated
+     * fields set.
+     * Example:
+     * 
+     * <pre>
+     * final Group groupToUpdate = new Group();
+     * groupToUpdate.setPerPagePref("user_per_page_pref50");
+     * final Group updatedGroup = client.group().updateGroup(groupToUpdate);
+     * </pre>
+     * 
+     * @param group
+     *            - with only the updated fields set
+     * @return the full {@link Group} after a successful update
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
+    public Group updateGroup(final Group group) throws URISyntaxException, IOException, GroupsIOApiException
     {
-        throw new NotImplementedException("Not implemented in client");
+        if (apiClient.group().getPermissions(group.getId()).getManageGroupSettings())
+        {
+            final URIBuilder uri = new URIBuilder().setPath(baseUrl + "updategroup");
+            final HttpPost request = new HttpPost();
+            final Map<String, Object> map = OM.convertValue(group, Map.class);
+            final List<BasicNameValuePair> postParameters = new ArrayList<>();
+            for (final Entry<String, Object> entry : map.entrySet())
+            {
+                postParameters.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
+            }
+            request.setEntity(new UrlEncodedFormEntity(postParameters));
+            
+            request.setURI(uri.build());
+            
+            return callApi(request, Group.class);
+        }
+        else
+        {
+            final Error error = new Error();
+            error.setType(GroupsIOApiExceptionType.INADEQUATE_PERMISSIONS);
+            throw new GroupsIOApiException(error);
+        }
     }
     
     public void deleteGroup(final Integer groupId)

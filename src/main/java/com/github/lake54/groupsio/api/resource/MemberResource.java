@@ -11,9 +11,11 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
 
 import com.github.lake54.groupsio.api.GroupsIOApiClient;
+import com.github.lake54.groupsio.api.domain.Error;
 import com.github.lake54.groupsio.api.domain.Page;
 import com.github.lake54.groupsio.api.domain.Subscription;
 import com.github.lake54.groupsio.api.exception.GroupsIOApiException;
+import com.github.lake54.groupsio.api.exception.GroupsIOApiExceptionType;
 
 public class MemberResource extends BaseResource
 {
@@ -106,9 +108,26 @@ public class MemberResource extends BaseResource
         throw new UnsupportedOperationException("Not implemented in API");
     }
     
-    public void sendBounceProbe()
+    public Subscription sendBounceProbe(final Integer groupId, final Integer subscriptionId)
+            throws URISyntaxException, IOException, GroupsIOApiException
     {
-        throw new UnsupportedOperationException("Not implemented in API");
+        if (apiClient.group().getPermissions(groupId).getManageMemberSubscriptionOptions()
+                && getMemberInGroup(groupId, subscriptionId).getUserStatus().canSendBounceProbe())
+        {
+            final URIBuilder uri = new URIBuilder().setPath(baseUrl + "sendbounceprobe");
+            uri.setParameter("group_id", groupId.toString());
+            uri.setParameter("sub_id", subscriptionId.toString());
+            final HttpRequestBase request = new HttpGet();
+            request.setURI(uri.build());
+            
+            return callApi(request, Subscription.class);
+        }
+        else
+        {
+            final Error error = new Error();
+            error.setType(GroupsIOApiExceptionType.INADEQUATE_PERMISSIONS);
+            throw new GroupsIOApiException(error);
+        }
     }
     
     public void sendConfirmationEmail()

@@ -59,12 +59,21 @@ public class GroupResource extends BaseResource
      */
     public Group getGroup(final Integer groupId) throws URISyntaxException, IOException, GroupsIOApiException
     {
-        final URIBuilder uri = new URIBuilder().setPath(baseUrl + "getgroup");
-        uri.setParameter("group_id", groupId.toString());
-        final HttpRequestBase request = new HttpGet();
-        request.setURI(uri.build());
-        
-        return callApi(request, Group.class);
+        if (apiClient.group().getPermissions(groupId).getManageGroupSettings())
+        {
+            final URIBuilder uri = new URIBuilder().setPath(baseUrl + "getgroup");
+            uri.setParameter("group_id", groupId.toString());
+            final HttpRequestBase request = new HttpGet();
+            request.setURI(uri.build());
+            
+            return callApi(request, Group.class);
+        }
+        else
+        {
+            final Error error = new Error();
+            error.setType(GroupsIOApiExceptionType.INADEQUATE_PERMISSIONS);
+            throw new GroupsIOApiException(error);
+        }
     }
     
     /**

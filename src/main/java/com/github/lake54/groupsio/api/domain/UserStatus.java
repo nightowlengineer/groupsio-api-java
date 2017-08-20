@@ -15,4 +15,9 @@ public enum UserStatus
                 return false;
         }
     }
+    
+    public Boolean canSendConfirmationEmail()
+    {
+        return this == user_status_notconfirmed;
+    }
 }

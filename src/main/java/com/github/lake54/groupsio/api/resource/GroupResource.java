@@ -120,7 +120,7 @@ public class GroupResource extends BaseResource
      * 
      * <pre>
      * final Group groupToUpdate = new Group();
-     * groupToUpdate.setPerPagePref("user_per_page_pref50");
+     * groupToUpdate.setWebsite("https://github.com/lake54/groupsio-api-java");
      * final Group updatedGroup = client.group().updateGroup(groupToUpdate);
      * </pre>
      * 

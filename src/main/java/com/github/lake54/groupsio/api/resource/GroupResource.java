@@ -57,6 +57,11 @@ public class GroupResource extends BaseResource
         return callApi(request, Group.class);
     }
     
+    public void getSubgroups(final Integer groupId)
+    {
+        throw new NotImplementedException("Not implemented in client");
+    }
+    
     public void createSubGroup(final Integer groupId, final String name, final String description, final String privacy)
     {
         throw new UnsupportedOperationException("Not implemented in API");

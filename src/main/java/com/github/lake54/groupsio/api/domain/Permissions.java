@@ -16,6 +16,11 @@ public class Permissions
     private Boolean manageHashtags;
     private Boolean manageIntegrations;
     private Boolean manageGroupSettings;
+    private Boolean makeModerator;
+    private Boolean manageMemberSubscriptionOptions;
+    private Boolean managePendingMembers;
+    private Boolean removeMembers;
+    private Boolean banMembers;
     private Boolean manageGroupBilling;
     private Boolean editArchives;
     private Boolean managePendingMessages;
@@ -49,8 +54,11 @@ public class Permissions
      * @param manageFiles
      * @param managePolls
      * @param manageMembers
+     * @param managePendingMembers
      * @param manageSubgroups
+     * @param banMembers
      * @param manageGroupBilling
+     * @param manageMemberSubscriptionOptions
      * @param object
      * @param manageIntegrations
      * @param canPost
@@ -60,8 +68,8 @@ public class Permissions
      * @param deleteGroup
      * @param managePhotos
      * @param inviteMembers
-     * @param managePendingMessages
      * @param manageChats
+     * @param managePendingMessages
      * @param viewMemberDirectory
      * @param manageSubscription
      * @param viewFiles
@@ -72,19 +80,22 @@ public class Permissions
      * @param manageCalendar
      * @param downloadMembers
      * @param manageWiki
+     * @param removeMembers
      * @param editArchives
+     * @param makeModerator
      * @param viewChats
      * @param viewMembers
      * @param viewCalendar
      */
     public Permissions(final String object, final Boolean manageSubgroups, final Boolean deleteGroup, final Boolean viewArchives,
             final Boolean downloadMembers, final Boolean viewActivity, final Boolean manageHashtags, final Boolean manageIntegrations,
-            final Boolean manageGroupSettings, final Boolean manageGroupBilling, final Boolean editArchives,
-            final Boolean managePendingMessages, final Boolean inviteMembers, final Boolean viewDatabases, final Boolean canPost,
-            final Boolean managePolls, final Boolean viewPhotos, final Boolean managePhotos, final Boolean manageMembers,
-            final Boolean viewCalendar, final Boolean manageCalendar, final Boolean viewChats, final Boolean manageChats,
-            final Boolean viewMemberDirectory, final Boolean viewFiles, final Boolean manageFiles, final Boolean viewMembers,
-            final Boolean viewWiki, final Boolean manageWiki, final Boolean manageSubscription)
+            final Boolean manageGroupSettings, final Boolean makeModerator, final Boolean manageMemberSubscriptionOptions,
+            final Boolean managePendingMembers, final Boolean removeMembers, final Boolean banMembers, final Boolean manageGroupBilling,
+            final Boolean editArchives, final Boolean managePendingMessages, final Boolean inviteMembers, final Boolean viewDatabases,
+            final Boolean canPost, final Boolean managePolls, final Boolean viewPhotos, final Boolean managePhotos,
+            final Boolean manageMembers, final Boolean viewCalendar, final Boolean manageCalendar, final Boolean viewChats,
+            final Boolean manageChats, final Boolean viewMemberDirectory, final Boolean viewFiles, final Boolean manageFiles,
+            final Boolean viewMembers, final Boolean viewWiki, final Boolean manageWiki, final Boolean manageSubscription)
     {
         super();
         this.object = object;
@@ -96,6 +107,11 @@ public class Permissions
         this.manageHashtags = manageHashtags;
         this.manageIntegrations = manageIntegrations;
         this.manageGroupSettings = manageGroupSettings;
+        this.makeModerator = makeModerator;
+        this.manageMemberSubscriptionOptions = manageMemberSubscriptionOptions;
+        this.managePendingMembers = managePendingMembers;
+        this.removeMembers = removeMembers;
+        this.banMembers = banMembers;
         this.manageGroupBilling = manageGroupBilling;
         this.editArchives = editArchives;
         this.managePendingMessages = managePendingMessages;
@@ -260,6 +276,86 @@ public class Permissions
     public Permissions withManageGroupSettings(final Boolean manageGroupSettings)
     {
         this.manageGroupSettings = manageGroupSettings;
+        return this;
+    }
+    
+    public Boolean getMakeModerator()
+    {
+        return makeModerator;
+    }
+    
+    public void setMakeModerator(final Boolean makeModerator)
+    {
+        this.makeModerator = makeModerator;
+    }
+    
+    public Permissions withMakeModerator(final Boolean makeModerator)
+    {
+        this.makeModerator = makeModerator;
+        return this;
+    }
+    
+    public Boolean getManageMemberSubscriptionOptions()
+    {
+        return manageMemberSubscriptionOptions;
+    }
+    
+    public void setManageMemberSubscriptionOptions(final Boolean manageMemberSubscriptionOptions)
+    {
+        this.manageMemberSubscriptionOptions = manageMemberSubscriptionOptions;
+    }
+    
+    public Permissions withManageMemberSubscriptionOptions(final Boolean manageMemberSubscriptionOptions)
+    {
+        this.manageMemberSubscriptionOptions = manageMemberSubscriptionOptions;
+        return this;
+    }
+    
+    public Boolean getManagePendingMembers()
+    {
+        return managePendingMembers;
+    }
+    
+    public void setManagePendingMembers(final Boolean managePendingMembers)
+    {
+        this.managePendingMembers = managePendingMembers;
+    }
+    
+    public Permissions withManagePendingMembers(final Boolean managePendingMembers)
+    {
+        this.managePendingMembers = managePendingMembers;
+        return this;
+    }
+    
+    public Boolean getRemoveMembers()
+    {
+        return removeMembers;
+    }
+    
+    public void setRemoveMembers(final Boolean removeMembers)
+    {
+        this.removeMembers = removeMembers;
+    }
+    
+    public Permissions withRemoveMembers(final Boolean removeMembers)
+    {
+        this.removeMembers = removeMembers;
+        return this;
+    }
+    
+    public Boolean getBanMembers()
+    {
+        return banMembers;
+    }
+    
+    public void setBanMembers(final Boolean banMembers)
+    {
+        this.banMembers = banMembers;
+    }
+    
+    public Permissions withBanMembers(final Boolean banMembers)
+    {
+        this.banMembers = banMembers;
         return this;
     }
     
@@ -609,7 +705,8 @@ public class Permissions
     public int hashCode()
     {
         return new HashCodeBuilder().append(object).append(manageSubgroups).append(deleteGroup).append(viewArchives).append(downloadMembers)
-                .append(viewActivity).append(manageHashtags).append(manageIntegrations).append(manageGroupSettings)
+                .append(viewActivity).append(manageHashtags).append(manageIntegrations).append(manageGroupSettings).append(makeModerator)
+                .append(manageMemberSubscriptionOptions).append(managePendingMembers).append(removeMembers).append(banMembers)
                 .append(manageGroupBilling).append(editArchives).append(managePendingMessages).append(inviteMembers).append(viewDatabases)
                 .append(canPost).append(managePolls).append(viewPhotos).append(managePhotos).append(manageMembers).append(viewCalendar)
                 .append(manageCalendar).append(viewChats).append(manageChats).append(viewMemberDirectory).append(viewFiles)
@@ -632,14 +729,17 @@ public class Permissions
                 .append(deleteGroup, rhs.deleteGroup).append(viewArchives, rhs.viewArchives).append(downloadMembers, rhs.downloadMembers)
                 .append(viewActivity, rhs.viewActivity).append(manageHashtags, rhs.manageHashtags)
                 .append(manageIntegrations, rhs.manageIntegrations).append(manageGroupSettings, rhs.manageGroupSettings)
-                .append(manageGroupBilling, rhs.manageGroupBilling).append(editArchives, rhs.editArchives)
-                .append(managePendingMessages, rhs.managePendingMessages).append(inviteMembers, rhs.inviteMembers)
-                .append(viewDatabases, rhs.viewDatabases).append(canPost, rhs.canPost).append(managePolls, rhs.managePolls)
-                .append(viewPhotos, rhs.viewPhotos).append(managePhotos, rhs.managePhotos).append(manageMembers, rhs.manageMembers)
-                .append(viewCalendar, rhs.viewCalendar).append(manageCalendar, rhs.manageCalendar).append(viewChats, rhs.viewChats)
-                .append(manageChats, rhs.manageChats).append(viewMemberDirectory, rhs.viewMemberDirectory).append(viewFiles, rhs.viewFiles)
-                .append(manageFiles, rhs.manageFiles).append(viewMembers, rhs.viewMembers).append(viewWiki, rhs.viewWiki)
-                .append(manageWiki, rhs.manageWiki).append(manageSubscription, rhs.manageSubscription).isEquals();
+                .append(makeModerator, rhs.makeModerator).append(manageMemberSubscriptionOptions, rhs.manageMemberSubscriptionOptions)
+                .append(managePendingMembers, rhs.managePendingMembers).append(removeMembers, rhs.removeMembers)
+                .append(banMembers, rhs.banMembers).append(manageGroupBilling, rhs.manageGroupBilling)
+                .append(editArchives, rhs.editArchives).append(managePendingMessages, rhs.managePendingMessages)
+                .append(inviteMembers, rhs.inviteMembers).append(viewDatabases, rhs.viewDatabases).append(canPost, rhs.canPost)
+                .append(managePolls, rhs.managePolls).append(viewPhotos, rhs.viewPhotos).append(managePhotos, rhs.managePhotos)
+                .append(manageMembers, rhs.manageMembers).append(viewCalendar, rhs.viewCalendar).append(manageCalendar, rhs.manageCalendar)
+                .append(viewChats, rhs.viewChats).append(manageChats, rhs.manageChats).append(viewMemberDirectory, rhs.viewMemberDirectory)
+                .append(viewFiles, rhs.viewFiles).append(manageFiles, rhs.manageFiles).append(viewMembers, rhs.viewMembers)
+                .append(viewWiki, rhs.viewWiki).append(manageWiki, rhs.manageWiki).append(manageSubscription, rhs.manageSubscription)
+                .isEquals();
     }
     
 }

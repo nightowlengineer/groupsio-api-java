@@ -122,7 +122,6 @@ public class UserResource extends BaseResource
         for (final Entry<String, Object> entry : map.entrySet())
         {
             postParameters.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
-            System.out.println("Adding " + entry.getKey() + " with " + entry.getValue().toString());
         }
         request.setEntity(new UrlEncodedFormEntity(postParameters));
         

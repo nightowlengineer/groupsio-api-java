@@ -78,6 +78,44 @@ public class MemberResource extends BaseResource
         return subscriptions;
     }
     
+    /**
+     * Gets a list of members (represented by {@link Subscription}) subscribed
+     * to a particular group.
+     * 
+     * @param groupId
+     *            - which group to get members from
+     * @param query
+     *            - what to search for (will search over email or name)
+     * @return {@link List}<{@link Subscription}> representing the subscribed
+     *         members
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
+    public List<Subscription> searchMembers(final Integer groupId, final String query)
+            throws URISyntaxException, IOException, GroupsIOApiException
+    {
+        final URIBuilder uri = new URIBuilder().setPath(baseUrl + "searchmembers");
+        uri.setParameter("group_id", groupId.toString());
+        uri.setParameter("q", query);
+        uri.setParameter("limit", MAX_RESULTS);
+        final HttpRequestBase request = new HttpGet();
+        request.setURI(uri.build());
+        
+        Page page = callApi(request, Page.class);
+        final List<Subscription> subscriptions = Arrays.asList(OM.convertValue(page.getData(), Subscription[].class));
+        
+        while (page.getHasMore())
+        {
+            uri.setParameter("page_token", page.getNextPageToken().toString());
+            request.setURI(uri.build());
+            page = callApi(request, Page.class);
+            subscriptions.addAll(Arrays.asList(OM.convertValue(page.getData(), Subscription[].class)));
+        }
+        
+        return subscriptions;
+    }
+    
     public void updateMember(final Subscription subscription)
     {
         throw new NotImplementedException("Not implemented in client");

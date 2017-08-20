@@ -2,13 +2,18 @@ package com.github.lake54.groupsio.api.resource;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
-import org.apache.commons.lang3.NotImplementedException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.github.lake54.groupsio.api.GroupsIOApiClient;
 import com.github.lake54.groupsio.api.domain.Error;
@@ -143,9 +148,49 @@ public class MemberResource extends BaseResource
         }
     }
     
-    public void updateMember(final Subscription subscription)
+    /**
+     * Update a subscription to a group given a blank {@link Subscription}
+     * object with only the updated
+     * fields set.
+     * Example:
+     * 
+     * <pre>
+     * final Subscription subToUpdate = new Subscription();
+     * subToUpdate.setAutoFollowReplies(true);
+     * final Subscription updateSub = client.member().updateMember(subToUpdate);
+     * </pre>
+     * 
+     * @param subscription
+     *            - with only the updated fields set
+     * @return the full {@link Subscription} after a successful update
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
+    public Subscription updateMember(final Subscription subscription) throws URISyntaxException, IOException, GroupsIOApiException
     {
-        throw new NotImplementedException("Not implemented in client");
+        if (apiClient.group().getPermissions(subscription.getGroupId()).getManageMemberSubscriptionOptions())
+        {
+            final URIBuilder uri = new URIBuilder().setPath(baseUrl + "updatemember");
+            final HttpPost request = new HttpPost();
+            final Map<String, Object> map = OM.convertValue(subscription, Map.class);
+            final List<BasicNameValuePair> postParameters = new ArrayList<>();
+            for (final Entry<String, Object> entry : map.entrySet())
+            {
+                postParameters.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
+            }
+            request.setEntity(new UrlEncodedFormEntity(postParameters));
+            
+            request.setURI(uri.build());
+            
+            return callApi(request, Subscription.class);
+        }
+        else
+        {
+            final Error error = new Error();
+            error.setType(GroupsIOApiExceptionType.INADEQUATE_PERMISSIONS);
+            throw new GroupsIOApiException(error);
+        }
     }
     
     public void banMember()

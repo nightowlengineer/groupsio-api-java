@@ -1,13 +1,12 @@
 package com.github.lake54.groupsio.api.resource;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import com.github.lake54.groupsio.api.GroupsIOApiClient;
+import com.github.lake54.groupsio.api.domain.DirectAdd;
+import com.github.lake54.groupsio.api.domain.Error;
+import com.github.lake54.groupsio.api.domain.Page;
+import com.github.lake54.groupsio.api.domain.Subscription;
+import com.github.lake54.groupsio.api.exception.GroupsIOApiException;
+import com.github.lake54.groupsio.api.exception.GroupsIOApiExceptionType;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -16,12 +15,13 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.github.lake54.groupsio.api.GroupsIOApiClient;
-import com.github.lake54.groupsio.api.domain.Error;
-import com.github.lake54.groupsio.api.domain.Page;
-import com.github.lake54.groupsio.api.domain.Subscription;
-import com.github.lake54.groupsio.api.exception.GroupsIOApiException;
-import com.github.lake54.groupsio.api.exception.GroupsIOApiExceptionType;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class MemberResource extends BaseResource
 {
@@ -260,10 +260,38 @@ public class MemberResource extends BaseResource
             throw new GroupsIOApiException(error);
         }
     }
-    
-    public void directAddMember()
+
+    /**
+     * Add members directly to a group
+     *
+     * @param groupId
+     *      of the group they should be added to
+     * @param emails
+     *      a list of email address to add.
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
+    public void directAddMember(final Integer groupId, List<String> emails)
+            throws URISyntaxException, IOException, GroupsIOApiException
     {
-        throw new NotImplementedException("Not implemented in client");
+
+        if (apiClient.group().getPermissions(groupId).getInviteMembers())
+        {
+            final URIBuilder uri = new URIBuilder().setPath(baseUrl + "directadd");
+            uri.setParameter("group_id", groupId.toString());
+            uri.setParameter("emails", String.join("\n", emails));
+            final HttpRequestBase request = new HttpGet();
+            request.setURI(uri.build());
+
+            callApi(request, DirectAdd.class);
+        }
+        else
+        {
+            final Error error = new Error();
+            error.setType(GroupsIOApiExceptionType.INADEQUATE_PERMISSIONS);
+            throw new GroupsIOApiException(error);
+        }
     }
     
     public void inviteMember()

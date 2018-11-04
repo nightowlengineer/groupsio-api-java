@@ -60,5 +60,6 @@ local.properties
 # Locally stored "Eclipse launch configurations"
 *.launch
 
-# IntelliJ
-.idea
+### IntelliJ
+.idea/
+*.iml

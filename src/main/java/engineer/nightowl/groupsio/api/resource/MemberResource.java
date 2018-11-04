@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import engineer.nightowl.groupsio.api.GroupsIOApiClient;
 import engineer.nightowl.groupsio.api.exception.GroupsIOApiException;
 import engineer.nightowl.groupsio.api.exception.GroupsIOApiExceptionType;
+import com.github.lake54.groupsio.api.domain.DirectAdd;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -260,10 +261,38 @@ public class MemberResource extends BaseResource
             throw new GroupsIOApiException(error);
         }
     }
-    
-    public void directAddMember()
+
+    /**
+     * Add members directly to a group
+     *
+     * @param groupId
+     *      of the group they should be added to
+     * @param emails
+     *      a list of email address to add.
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws GroupsIOApiException
+     */
+    public void directAddMember(final Integer groupId, List<String> emails)
+            throws URISyntaxException, IOException, GroupsIOApiException
     {
-        throw new NotImplementedException("Not implemented in client");
+
+        if (apiClient.group().getPermissions(groupId).getInviteMembers())
+        {
+            final URIBuilder uri = new URIBuilder().setPath(baseUrl + "directadd");
+            uri.setParameter("group_id", groupId.toString());
+            uri.setParameter("emails", String.join("\n", emails));
+            final HttpRequestBase request = new HttpGet();
+            request.setURI(uri.build());
+
+            callApi(request, DirectAdd.class);
+        }
+        else
+        {
+            final Error error = new Error();
+            error.setType(GroupsIOApiExceptionType.INADEQUATE_PERMISSIONS);
+            throw new GroupsIOApiException(error);
+        }
     }
     
     public void inviteMember()

@@ -2,29 +2,22 @@
 # groupsio-api-java
 Java client library for the [Groups.io](https://groups.io) API.
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/20f576734d04430bb3c90bf7ce7c119f)](https://www.codacy.com/app/james/groupsio-api-java?utm_source=github.com&utm_medium=referral&utm_content=lake54/groupsio-api-java&utm_campaign=badger)
-[![Build Status](https://travis-ci.org/lake54/groupsio-api-java.svg?branch=master)](https://travis-ci.org/lake54/groupsio-api-java)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/20f576734d04430bb3c90bf7ce7c119f)](https://www.codacy.com/app/james/groupsio-api-java?utm_source=github.com&utm_medium=referral&utm_content=nightowlengineer/groupsio-api-java&utm_campaign=badger)
+[![Build Status](https://travis-ci.org/nightowlengineer/groupsio-api-java.svg?branch=master)](https://travis-ci.org/nightowlengineer/groupsio-api-java)
 
-[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/lake54/groupsio-api-java/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/nightowlengineer/groupsio-api-java/master/LICENSE)
 
 ## What is Groups.io?
 Groups.io is a service that provides online communities and mailing lists - essentially a modern alternative to Yahoo! Groups.
 
 See https://groups.io to find out more about the service.
 
-## Download
-As the project isn't yet available via Maven Central, install to your local repository:
-```bash
-git clone https://github.com/lake54/groupsio-api-java.git
-cd groupsio-api-java
-mvn install
-```
-... then add the dependency to your project's pom.xml:
+## Maven
 ```xml
 <dependency>
-    <groupId>com.github.lake54</groupId>
+    <groupId>engineer.nightowl</groupId>
     <artifactId>groupsio-api-java</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 </dependency>
 ```
 
@@ -54,12 +47,12 @@ With the API, only invalid_value will contain an 'extra' value, all other errors
 ```
 
 ## Issue Reporting
-If you've found an issue or have a request with this client, please [create an issue](https://github.com/lake54/groupsio-api-java/issues/new).
+If you've found an issue or have a request with this client, please [create an issue](https://github.com/nightowlengineer/groupsio-api-java/issues/new).
 
 If you have an issue or question about the API itself, a mailing list is available [here](https://beta.groups.io/g/api).
 
 ## Author
-[James Milligan](https://github.com/lake54)
+[James Milligan](https://github.com/nightowlengineer)
 
 ## Legal
 This project is licensed under the GPLv3 license. See the [LICENSE](LICENSE) file for more info.

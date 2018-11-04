@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import engineer.nightowl.groupsio.api.GroupsIOApiClient;
 import engineer.nightowl.groupsio.api.exception.GroupsIOApiException;
 import engineer.nightowl.groupsio.api.exception.GroupsIOApiExceptionType;
-import com.github.lake54.groupsio.api.domain.DirectAdd;
+import engineer.nightowl.groupsio.api.domain.DirectAdd;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;

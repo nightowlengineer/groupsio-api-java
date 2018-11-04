@@ -1,4 +1,4 @@
-package com.github.lake54.groupsio.api.domain;
+package engineer.nightowl.groupsio.api.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

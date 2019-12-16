@@ -7,7 +7,7 @@
     <version>0.0.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>${project.groupId}-${project.artifactId}</name>
+    <name>groupsio-api-java</name>
     <description>Java client for the Groups.IO API</description>
     <url>https://github.com/nightowlengineer/groupsio-api-java</url>
     <inceptionYear>2017</inceptionYear>

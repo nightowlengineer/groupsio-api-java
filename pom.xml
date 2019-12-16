@@ -4,7 +4,7 @@
 
     <groupId>engineer.nightowl</groupId>
     <artifactId>groupsio-api-java</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}-${project.artifactId}</name>
@@ -16,7 +16,7 @@
         <connection>scm:git:git://github.com/nightowlengineer/groupsio-api-java.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/nightowlengineer/groupsio-api-java.git</developerConnection>
         <url>https://github.com/nightowlengineer/groupsio-api-java/tree/master</url>
-        <tag>0.0.3</tag>
+        <tag>HEAD</tag>
     </scm>
 	
 	<developers>

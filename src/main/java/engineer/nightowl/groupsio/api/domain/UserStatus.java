@@ -2,7 +2,7 @@ package engineer.nightowl.groupsio.api.domain;
 
 public enum UserStatus
 {
-    user_status_notconfirmed, user_status_confirmed, user_status_inactive, user_status_bouncing, user_status_bounced;
+    user_status_not_confirmed, user_status_confirmed, user_status_inactive, user_status_bouncing, user_status_bounced;
     
     public Boolean canSendBounceProbe()
     {
@@ -18,6 +18,6 @@ public enum UserStatus
     
     public Boolean canSendConfirmationEmail()
     {
-        return this == user_status_notconfirmed;
+        return this == user_status_not_confirmed;
     }
 }
